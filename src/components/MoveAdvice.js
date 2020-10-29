@@ -22,7 +22,7 @@ class MoveAdvice extends React.Component {
   };
 
   render() {
-    const { classes, row, col, open } = this.props;
+    const { classes, msg, open } = this.props;
     return (
         <Snackbar
           anchorOrigin={{
@@ -35,7 +35,7 @@ class MoveAdvice extends React.Component {
           ContentProps={{
             'aria-describedby': 'message-id',
           }}
-          message={<span id="message-id">Clicked {row } @ { col }</span>}
+          message={<span id="message-id">{msg}</span>}
           action={[
             <IconButton
               key="close"

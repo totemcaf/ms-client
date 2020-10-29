@@ -1,120 +1,83 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import GameBoard from './GameBoard'
 import { withStyles } from '@material-ui/core/styles';
-//import IconButton from '@material-ui/core/IconButton';
-//import InfoIcon from '@material-ui/icons/Info';
-import Covered from '../cells/Covered.png';
-import RedFlagged from '../cells/RedFlagged.png'
-import Mine from '../cells/Mine.png'
-import ExplodedMine from '../cells/ExplodedMine.png'
-import Uncovered0 from '../cells/Uncovered(0).png'
-import Uncovered1 from '../cells/Uncovered(1).png'
-import Uncovered2 from '../cells/Uncovered(2).png'
-import Uncovered3 from '../cells/Uncovered(3).png'
-import Uncovered4 from '../cells/Uncovered(4).png'
-import Uncovered5 from '../cells/Uncovered(5).png'
-import Uncovered6 from '../cells/Uncovered(6).png'
-import Uncovered7 from '../cells/Uncovered(7).png'
-import Uncovered8 from '../cells/Uncovered(8).png'
-import MoveAdvice from './MoveAdvice'
 
-const styles = theme => ({
+const styles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
-    backgroundColor: theme.palette.background.paper,
+    flexGrow: 1,
   },
-  gridList: {
-    width: 500,
-    height: 450,
+  paper: {
+    padding: theme.spacing(2),
+    margin: 'auto',
+    maxWidth: 500,
   },
-  icon: {
-      color: 'rgba(255, 255, 255, 0.54)',
-    },
-
   image: {
-    width: 20,
-    height: 20,
+    width: 128,
+    height: 128,
   },
-  table: {
-    marginTop: 50,
-    borderCollapse: 'collapse',
-    border: '5px solid #CCC',
+  img: {
+    margin: 'auto',
+    display: 'block',
+    maxWidth: '100%',
+    maxHeight: '100%',
   },
-  cell: {
-     border: 'none',
-     margin: 0,
-     padding: 0,
-  }
-});
+}));
 
-const images = {
-    "Covered": Covered,
-    "RedFlagged": RedFlagged,
-    "Mine": Mine,
-    "ExplodedMine": ExplodedMine,
-    "Uncovered(0)": Uncovered0,
-    "Uncovered(1)": Uncovered1,
-    "Uncovered(2)": Uncovered2,
-    "Uncovered(3)": Uncovered3,
-    "Uncovered(4)": Uncovered4,
-    "Uncovered(5)": Uncovered5,
-    "Uncovered(6)": Uncovered6,
-    "Uncovered(7)": Uncovered7,
-    "Uncovered(8)": Uncovered8
-}
-
-class CellGrid extends React.Component {
-
-    state = {
-        open: false
-    }
-
-  handleClick = (e, row, col) => {
-    var action
-    if (e.ctrlKey) action = "QuestionMarked"
-    else if (e.shiftKey) action = "RedFlagged"
-    else action = "Uncover";
-
-    this.setState( {row: row, col: col, open: true})
-    this.props.onCellClicked( row, col, action )
-  }
-
-  handleClose = () => {
-    this.setState( { open: false } )
-  }
+class GameView extends React.Component {
 
   render() {
-        if (!this.props.game) {
-            return (
-                <div>Please, create a new game</div>
-            );
-        }
+    var { game, classes } = this.props;
 
-      const { classes, game: {cells} } = this.props;
-      const { open, row, col } = this.state
+    if (!game) {
+        return (
+            <div>Please, create a new game</div>
+        );
+    }
+
       return (
-
         <div className={classes.root}>
-            <table className={classes.table}>
-                <tbody>
-                    {cells.flatMap((cols, row) => (
-                        <tr className={classes.cell} key={ row }>
-                        {cols.map((cell, col) => (
-                            <td
-                                className={classes.cell} key={ `${row}:${col}` }
-                                onClick= { e => this.handleClick(e, row + 1, col + 1) }
-                            ><img className={classes.image} src={ images[cell] } alt="?" /></td>
-                        ))}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <MoveAdvice onClose={ this.handleClose } row={ row } col={ col } open = { open }/>
+            <Grid container spacing={2} direction="column">
+              <Grid container item direction="row" xs={12}>
+                  <Grid item xs={4}>
+                    <Paper className={classes.paper}>
+                        <Typography gutterBottom variant="subtitle1">
+                          Mines to find: { 'X' }
+                        </Typography>
+                    </Paper>
+                  </Grid>
+                  <Grid item xs={4}>
+                    <Paper className={classes.paper}>
+                        <Typography gutterBottom variant="subtitle1">
+                          { game.state }
+                        </Typography>
+                      </Paper>
+                  </Grid>
+                  <Grid item xs={4}>
+                      <Paper className={classes.paper}>
+                        <Typography gutterBottom variant="subtitle1">
+                          Time: { 'X' }
+                        </Typography>
+                      </Paper>
+                  </Grid>
+              </Grid>
+              <Grid item xs={12} sm>
+                <Typography variant="body2" color="textSecondary">
+                  Click: Uncover, Shift-Click: Flag / Question mark / Unflag
+                </Typography>
+              </Grid>
+              <Grid item xs={12} sm>
+                  <Paper className={classes.paper}>
+                       <GameBoard game={ this.props.game } onCellClicked= { this.props.onCellClicked } />
+                  </Paper>
+              </Grid>
+            </Grid>
         </div>
       );
     }
 }
 
-export default withStyles(styles)(CellGrid);
+export default withStyles(styles)(GameView);
