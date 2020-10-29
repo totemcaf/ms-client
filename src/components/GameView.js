@@ -45,7 +45,7 @@ class GameView extends React.Component {
                   <Grid item xs={4}>
                     <Paper className={classes.paper}>
                         <Typography gutterBottom variant="subtitle1">
-                          Mines to find: { 'X' }
+                          Mines to find: { game.minesToFind }
                         </Typography>
                     </Paper>
                   </Grid>

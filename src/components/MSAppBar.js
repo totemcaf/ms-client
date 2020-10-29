@@ -62,12 +62,16 @@ class MSAppBar extends React.Component {
 
     this.setState({open: true, msg: `Clicked on ${row} @ ${col}`})
 
-    if (flag === "Uncover")
-        this.props.client.uncoverCell(game, row, col)
-            .then( game => this.setState({ game }) )
-    else
-        this.props.client.flagCell(game, row, col, flag)
-            .then( game => this.setState({ game }) )
+    const action = flag === "Uncover"
+        ? this.props.client.uncoverCell(game, row, col)
+        : this.props.client.flagCell(game, row, col, flag)
+
+    action.then( game => {
+                if (game.error)
+                    this.setState({open: true, msg: "Error: " + game.error})
+                else
+                    this.setState({ game })
+            })
   }
 
   render() {

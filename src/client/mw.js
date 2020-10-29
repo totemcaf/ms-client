@@ -6,6 +6,8 @@ class MwClient {
         this.baseUrl = baseUrl
     }
 
+    parseResult = response => response.ok ? response.json() : response.text().then( e => ({ error: e }));
+
     createNewGame = (rows, cols, mines) => {
         return fetch(
             `${this.baseUrl}/v1/games`,
@@ -17,7 +19,7 @@ class MwClient {
                 body: JSON.stringify( { rows, cols, mines } )
             }
         )
-        .then(response => response.json())
+        .then(this.parseResult)
     }
 
     flagCell = (game, row, col, flag) => {
@@ -31,7 +33,7 @@ class MwClient {
                 body: JSON.stringify( { row, col, flag } )
             }
         )
-        .then(response => response.json())
+        .then(this.parseResult)
     }
 
     uncoverCell = (game, row, col) => {
@@ -45,7 +47,7 @@ class MwClient {
                 body: JSON.stringify( { row, col } )
             }
         )
-        .then(response => response.json())
+        .then(this.parseResult)
     }
 }
 
