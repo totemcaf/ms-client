@@ -79,7 +79,12 @@ class CellGrid extends React.Component {
   }
 
   render() {
-      const { classes, game: {cells} } = this.props;
+      const { classes, game } = this.props;
+
+      console.log(`GameView: game: ${ game && game.id } `)
+
+        const cells = game.cells;
+
       return (
 
         <div className={classes.root}>

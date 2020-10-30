@@ -1,10 +1,10 @@
 import './App.css';
 import 'typeface-roboto';
 import MSAppBar from './components/MSAppBar';
-import MwClient from './client/mw'
+import MwClient from './client/ms'
 
-const mwClient = new MwClient("http://localhost:8080")
-
+// The following URL should be moved to configuration
+const mwClient = new MwClient("http://ec2-3-87-195-146.compute-1.amazonaws.com:8080")
 
 function App() {
   return (

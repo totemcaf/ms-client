@@ -43,7 +43,13 @@ class MSAppBar extends React.Component {
     const { rows, cols, mines } = sizes;
 
     this.props.client.createNewGame(rows, cols, mines)
-        .then( game => this.setState({ game }) )
+        .then( game => {
+            console.log("MSAppBar: new game: " + JSON.stringify(game))
+                if (game.error)
+                    this.setState({open: true, msg: "Error: " + game.error})
+                else
+                    this.setState({ game })
+            })
   }
 
 
@@ -76,8 +82,9 @@ class MSAppBar extends React.Component {
 
   render() {
       const { classes } = this.props;
-      const { msg, open } = this.state;
+      const { msg, open, game } = this.state;
 
+      console.log(`MSAppBar: game: ${ game && game.id } `)
       return (
         <div className={classes.root}>
           <AppBar position="static">
@@ -92,7 +99,7 @@ class MSAppBar extends React.Component {
             </Toolbar>
           </AppBar>
           <Paper className={classes.paper}>
-              <GameView game={ this.state.game } onCellClicked= { this.onCellClicked } />
+              <GameView game={ game } onCellClicked= { this.onCellClicked } />
           </Paper>
           <MoveAdvice onClose={ this.handleClose } msg={ msg } open = { open }/>
         </div>

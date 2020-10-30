@@ -1,0 +1,5 @@
+.idea/
+deploy/
+public/
+src/
+node_modules

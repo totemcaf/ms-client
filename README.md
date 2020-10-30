@@ -6,6 +6,20 @@ You can find it at http://ec2-3-87-195-146.compute-1.amazonaws.com:3000
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Comments for reviewers
+
+This application should not be considered a full production version. It is a simple UI for the companion API.
+
+It has not automatic tests, and it has no server side proxy (backend for front end) to comunicate
+the API from backend to backend.
+
+In case the latency to the API were considerable, no provision for blocking user actions until receiving the
+response was provided, nor alternative strategy to handle multiple user actions while the request is in progress.
+
+The modularization of view components can be improved.
+
+This application contains a simple API client (ms.js) for the Minesweeper API.
+ 
 ## Available Scripts
 
 In the project directory, you can run:
