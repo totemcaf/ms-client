@@ -11,7 +11,7 @@ const styles = theme => ({
   },
 });
 
-class MoveAdvice extends React.Component {
+class Message extends React.Component {
 
   handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -52,8 +52,8 @@ class MoveAdvice extends React.Component {
   }
 }
 
-MoveAdvice.propTypes = {
+Message.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MoveAdvice);
+export default withStyles(styles)(Message);

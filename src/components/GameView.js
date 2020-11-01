@@ -44,6 +44,13 @@ class GameView extends React.Component {
       return (
         <div className={classes.root}>
             <Grid container spacing={2} direction="column">
+              <Grid item xs={12}>
+                 <Paper className={classes.paper}>
+                      <Typography gutterBottom variant="subtitle1">
+                          Game { game.id }
+                      </Typography>
+                 </Paper>
+              </Grid>
               <Grid container item direction="row" xs={12}>
                   <Grid item xs={4}>
                     <Paper className={classes.paper}>

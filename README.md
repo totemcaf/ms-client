@@ -1,6 +1,6 @@
 # Minesweeper by Charly client UI
 
-This project contains the User Interface for the Minesweeper API.
+This project contains the User Interface for the [Minesweeper API](https://github.com/totemcaf/ms-api).
 
 You can find it at http://ec2-3-87-195-146.compute-1.amazonaws.com:5000
 

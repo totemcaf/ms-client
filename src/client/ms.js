@@ -8,9 +8,9 @@ class MwClient {
 
     parseResult = response => response.ok ? response.json() : response.text().then( e => ({ error: e }));
 
-    createNewGame = (rows, cols, mines) => {
+    createNewGame = (accountId, rows, cols, mines) => {
         return fetch(
-            `${this.baseUrl}/v1/games`,
+            `${this.baseUrl}/v2/accounts/${accountId}/games`,
             {
                 method: 'POST',
                 headers: {
@@ -22,9 +22,10 @@ class MwClient {
         .then(this.parseResult)
     }
 
-    findGame = id => {
+    findGame = (accountId, id) => {
+        console.log(`Finding game ${id} for account ${accountId}` );
         return fetch(
-            `${this.baseUrl}/v1/games/${id}`,
+            `${this.baseUrl}/v2/accounts/${accountId}/games/${id}`,
             {
                 method: 'GET',
                 headers: {
@@ -35,9 +36,11 @@ class MwClient {
         .then(this.parseResult)
     }
 
-    listGames = () => {
+    listGames = accountId => {
+        console.log(`Loading ${accountId} games` );
+
         return fetch(
-            `${this.baseUrl}/v1/games`,
+            `${this.baseUrl}/v2/accounts/${accountId}/games`,
             {
                 method: 'GET',
                 headers: {
@@ -48,9 +51,9 @@ class MwClient {
         .then(this.parseResult)
     }
 
-    flagCell = (game, row, col, flag) => {
+    flagCell = (accountId, game, row, col, flag) => {
         return fetch(
-            `${this.baseUrl}/v1/games/${game.id}/flags`,
+            `${this.baseUrl}/v2/accounts/${accountId}/games/${game.id}/flags`,
             {
                 method: 'POST',
                 headers: {
@@ -62,9 +65,9 @@ class MwClient {
         .then(this.parseResult)
     }
 
-    uncoverCell = (game, row, col) => {
+    uncoverCell = (accountId, game, row, col) => {
         return fetch(
-            `${this.baseUrl}/v1/games/${game.id}/uncovers`,
+            `${this.baseUrl}/v2/accounts/${accountId}/games/${game.id}/uncovers`,
             {
                 method: 'POST',
                 headers: {
