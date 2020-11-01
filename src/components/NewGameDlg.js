@@ -37,7 +37,7 @@ class NewGameDlg extends React.Component {
     return (
       <div>
         <Button variant="contained" onClick={this.handleClickOpen}>
-          Create new game
+          Create new
         </Button>
         <Dialog
           open={this.state.open}

@@ -22,6 +22,32 @@ class MwClient {
         .then(this.parseResult)
     }
 
+    findGame = id => {
+        return fetch(
+            `${this.baseUrl}/v1/games/${id}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
+        .then(this.parseResult)
+    }
+
+    listGames = () => {
+        return fetch(
+            `${this.baseUrl}/v1/games`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
+        .then(this.parseResult)
+    }
+
     flagCell = (game, row, col, flag) => {
         return fetch(
             `${this.baseUrl}/v1/games/${game.id}/flags`,
