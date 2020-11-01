@@ -2,7 +2,7 @@
 
 This project contains the User Interface for the Minesweeper API.
 
-You can find it at http://ec2-3-87-195-146.compute-1.amazonaws.com:3000
+You can find it at http://ec2-3-87-195-146.compute-1.amazonaws.com:5000
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

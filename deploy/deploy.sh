@@ -2,9 +2,11 @@
 
 HOST=ec2-3-87-195-146.compute-1.amazonaws.com
 
+ssh  -i $PEM ubuntu@$HOST "rm -r client/build/*"
+
 scp -i $PEM -r \
   ../build \
-  ubuntu@$HOST:/home/ubuntu/client/build/
+  ubuntu@$HOST:/home/ubuntu/client/
 
 scp -i $PEM \
   Dockerfile \

@@ -6,6 +6,7 @@ import Covered from '../cells/Covered.png';
 import RedFlagged from '../cells/RedFlagged.png'
 import Mine from '../cells/Mine.png'
 import ExplodedMine from '../cells/ExplodedMine.png'
+import IncorrectMine from '../cells/IncorrectMine.png'
 import Uncovered0 from '../cells/Uncovered(0).png'
 import Uncovered1 from '../cells/Uncovered(1).png'
 import Uncovered2 from '../cells/Uncovered(2).png'
@@ -55,6 +56,7 @@ const images = {
     "RedFlagged": RedFlagged,
     "Mine": Mine,
     "ExplodedMine": ExplodedMine,
+    "IncorrectMine": IncorrectMine,
     "Uncovered(0)": Uncovered0,
     "Uncovered(1)": Uncovered1,
     "Uncovered(2)": Uncovered2,
