@@ -16,6 +16,8 @@ the API from backend to backend.
 In case the latency to the API were considerable, no provision for blocking user actions until receiving the
 response was provided, nor alternative strategy to handle multiple user actions while the request is in progress.
 
+No provision for list of games growing too much is given.
+
 The modularization of view components can be improved.
 
 This application contains a simple API client (ms.js) for the Minesweeper API.
